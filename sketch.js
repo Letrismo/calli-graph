@@ -1,5 +1,5 @@
 (() => {
-  const BRUSH_TYPES = { Pilot: "pilot", "Pantógrafo": "pantograph" };
+  const BRUSH_TYPES = { Pilot: "pilot", "Pantógrafo": "pantograph", "Resorte": "tether", "Cerdas": "bristle" };
 
   let layer;
   let brush;
@@ -59,6 +59,20 @@
     originalSize: PANTOGRAPH_CONFIG.brush.originalSize,
     originalColor: PANTOGRAPH_CONFIG.brush.originalColor,
     originalAlpha: PANTOGRAPH_CONFIG.brush.originalAlpha,
+    offsetScaleX: TETHER_CONFIG.brush.offsetScaleX,
+    offsetScaleY: TETHER_CONFIG.brush.offsetScaleY,
+    offsetScalePressure: TETHER_CONFIG.brush.offsetScalePressure,
+    offsetSize: TETHER_CONFIG.brush.offsetSize,
+    offsetColor: TETHER_CONFIG.brush.offsetColor,
+    offsetAlpha: TETHER_CONFIG.brush.offsetAlpha,
+    bristleOffsetScaleX: BRISTLE_CONFIG.brush.bristleOffsetScaleX,
+    bristleOffsetScaleY: BRISTLE_CONFIG.brush.bristleOffsetScaleY,
+    bristleOffsetScalePressure: BRISTLE_CONFIG.brush.bristleOffsetScalePressure,
+    bristleOffsetSize: BRISTLE_CONFIG.brush.bristleOffsetSize,
+    bristleOffsetColor: BRISTLE_CONFIG.brush.bristleOffsetColor,
+    bristleOffsetAlpha: BRISTLE_CONFIG.brush.bristleOffsetAlpha,
+    maxLines: BRISTLE_CONFIG.brush.maxLines,
+    spread: BRISTLE_CONFIG.brush.spread,
     clear: () => layer?.clear()
   };
 
@@ -123,6 +137,24 @@
     track(original.add(state, "originalSize", 1, 96, 1)).name("Tamaño").onChange(syncBrush);
     track(original.add(state, "originalAlpha", 0.02, 1, 0.01)).name("Opacidad").onChange(syncBrush);
     track(original.addColor(state, "originalColor")).name("Color").onChange(syncBrush);
+
+    const tether = gui.addFolder("Resorte");
+    track(tether.add(state, "offsetScaleX", -4, 4, 0.1)).name("Desfase X").onChange(syncBrush);
+    track(tether.add(state, "offsetScaleY", -4, 4, 0.1)).name("Desfase Y").onChange(syncBrush);
+    track(tether.add(state, "offsetScalePressure", -4, 4, 0.1)).name("Desfase presión").onChange(syncBrush);
+    track(tether.add(state, "offsetSize", 1, 96, 1)).name("Tamaño").onChange(syncBrush);
+    track(tether.add(state, "offsetAlpha", 0.02, 1, 0.01)).name("Opacidad").onChange(syncBrush);
+    track(tether.addColor(state, "offsetColor")).name("Color").onChange(syncBrush);
+
+    const bristle = gui.addFolder("Cerdas");
+    track(bristle.add(state, "bristleOffsetScaleX", -4, 4, 0.1)).name("Desfase X").onChange(syncBrush);
+    track(bristle.add(state, "bristleOffsetScaleY", -4, 4, 0.1)).name("Desfase Y").onChange(syncBrush);
+    track(bristle.add(state, "bristleOffsetScalePressure", -4, 4, 0.1)).name("Desfase presión").onChange(syncBrush);
+    track(bristle.add(state, "bristleOffsetSize", 1, 96, 1)).name("Tamaño").onChange(syncBrush);
+    track(bristle.add(state, "bristleOffsetAlpha", 0.02, 1, 0.01)).name("Opacidad").onChange(syncBrush);
+    track(bristle.addColor(state, "bristleOffsetColor")).name("Color").onChange(syncBrush);
+    track(bristle.add(state, "maxLines", 1, 8, 1)).name("Máx. líneas").onChange(syncBrush);
+    track(bristle.add(state, "spread", 0, 1, 0.01)).name("Separación").onChange(syncBrush);
 
     const pressure = gui.addFolder("Pressure");
     track(pressure.add(state, "pressureEnabled")).name("Enabled").onChange(syncBrush);
@@ -198,8 +230,10 @@
     syncBrush();
   }
 
+  const BRUSH_CTORS = { pilot: Pilot, pantograph: Pantograph, tether: Tether, bristle: Bristle };
+
   function switchBrush(nextType) {
-    const Ctor = nextType === "pantograph" ? Pantograph : Pilot;
+    const Ctor = BRUSH_CTORS[nextType] || Pilot;
     brush = new Ctor();
     input.quill = brush;
     syncBrush();
@@ -234,7 +268,21 @@
       originalEnabled: state.originalEnabled,
       originalSize: state.originalSize,
       originalColor: state.originalColor,
-      originalAlpha: state.originalAlpha
+      originalAlpha: state.originalAlpha,
+      offsetScaleX: state.offsetScaleX,
+      offsetScaleY: state.offsetScaleY,
+      offsetScalePressure: state.offsetScalePressure,
+      offsetSize: state.offsetSize,
+      offsetColor: state.offsetColor,
+      offsetAlpha: state.offsetAlpha,
+      maxLines: state.maxLines,
+      spread: state.spread,
+      bristleOffsetScaleX: state.bristleOffsetScaleX,
+      bristleOffsetScaleY: state.bristleOffsetScaleY,
+      bristleOffsetScalePressure: state.bristleOffsetScalePressure,
+      bristleOffsetSize: state.bristleOffsetSize,
+      bristleOffsetColor: state.bristleOffsetColor,
+      bristleOffsetAlpha: state.bristleOffsetAlpha
     });
   }
 

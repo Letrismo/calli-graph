@@ -102,3 +102,78 @@ const PANTOGRAPH_CONFIG = {
     originalAlpha: 0.35
   }
 };
+
+const TETHER_CONFIG = {
+  brush: {
+    name: "Tether",
+    size: 48,
+    pressureEnabled: true,
+    pressureMinScale: 0.35,
+    pressureMaxScale: 1.65,
+    pressureGamma: 1,
+    pressureOverrideEnabled: false,
+    pressureOverride: 0.5,
+    spacing: 0.04,
+    curveStep: 0.12,
+    curveSmoothing: 1,
+    smoothingAmount: 0.24,
+    simplificationAlgorithm: "visvalingam-whyatt",
+    simplificationTolerance: 2.5,
+    colorMode: "gradient",
+    color: "#f2f2f0",
+    palette: [...PILOT_PALETTES.Aurora.colors],
+    compositeOperation: PILOT_PALETTES.Aurora.compositeOperation,
+    alpha: 0.06,
+    // The tethered line shares the stroke's start point; its distance from
+    // that anchor is the pointer's own displacement scaled per axis/pressure,
+    // so it stretches out as the pointer moves away and eases back in as the
+    // pointer returns toward the anchor.
+    offsetScaleX: 1.8,
+    offsetScaleY: 1.4,
+    offsetScalePressure: 1,
+    offsetSize: 48,
+    offsetColor: "#2de2e6",
+    offsetAlpha: 0.5
+  }
+};
+
+const BRISTLE_CONFIG = {
+  brush: {
+    name: "Bristle",
+    size: 48,
+    pressureEnabled: true,
+    pressureMinScale: 0.35,
+    pressureMaxScale: 1.65,
+    pressureGamma: 1,
+    pressureOverrideEnabled: false,
+    pressureOverride: 0.5,
+    spacing: 0.04,
+    curveStep: 0.12,
+    curveSmoothing: 1,
+    smoothingAmount: 0.24,
+    simplificationAlgorithm: "visvalingam-whyatt",
+    simplificationTolerance: 2.5,
+    colorMode: "gradient",
+    color: "#f2f2f0",
+    palette: [...PILOT_PALETTES.Aurora.colors],
+    compositeOperation: PILOT_PALETTES.Aurora.compositeOperation,
+    alpha: 0.06,
+    // Same tethered second line as Tether: shares the stroke's start point,
+    // its distance from that anchor is the pointer's own displacement scaled
+    // per axis/pressure. Named distinctly from Tether's so both brushes'
+    // settings can coexist in the same shared settings object.
+    bristleOffsetScaleX: 1.8,
+    bristleOffsetScaleY: 1.4,
+    bristleOffsetScalePressure: 1,
+    bristleOffsetSize: 48,
+    bristleOffsetColor: "#2de2e6",
+    bristleOffsetAlpha: 0.5,
+    // Both lines can fan into up to `maxLines` strands, laterally displaced
+    // perpendicular to the anchor→pointer line by `spread` times their
+    // distance from the anchor. How many are currently visible is driven by
+    // pressure: at low pressure only the centermost strand shows; heavier
+    // pressure opens up strands progressively outward from the center.
+    maxLines: 5,
+    spread: 0.2
+  }
+};
