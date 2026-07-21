@@ -1,6 +1,8 @@
 (() => {
+  const BRUSH_TYPES = { Pilot: "pilot", "Pantógrafo": "pantograph" };
+
   let layer;
-  let pilot;
+  let brush;
   let input;
   let gui;
   let guiControllers = [];
@@ -8,6 +10,7 @@
   let lastPressureGuiUpdate = 0;
 
   const state = {
+    brushType: "pilot",
     paletteName: "Aurora",
     background: PILOT_CONFIG.canvas.background,
     guidesEnabled: PILOT_CONFIG.canvas.guides.enabled,
@@ -49,6 +52,13 @@
     colorD: PILOT_CONFIG.brush.palette[3],
     compositeOperation: PILOT_CONFIG.brush.compositeOperation,
     alpha: PILOT_CONFIG.brush.alpha,
+    scaleX: PANTOGRAPH_CONFIG.brush.scaleX,
+    scaleY: PANTOGRAPH_CONFIG.brush.scaleY,
+    scalePressure: PANTOGRAPH_CONFIG.brush.scalePressure,
+    originalEnabled: PANTOGRAPH_CONFIG.brush.originalEnabled,
+    originalSize: PANTOGRAPH_CONFIG.brush.originalSize,
+    originalColor: PANTOGRAPH_CONFIG.brush.originalColor,
+    originalAlpha: PANTOGRAPH_CONFIG.brush.originalAlpha,
     clear: () => layer?.clear()
   };
 
@@ -62,9 +72,9 @@
     layer.pixelDensity(Math.min(window.devicePixelRatio || 1, 2));
     layer.clear();
 
-    pilot = new Pilot();
+    brush = new Pilot();
     pressureReadout = document.getElementById("pressure-readout");
-    input = new PointerInput(canvas.elt, pilot, layer, { onSample: updatePressureDebug });
+    input = new PointerInput(canvas.elt, brush, layer, { onSample: updatePressureDebug });
     setupGui();
     window.EQuillsUI?.bindSurfaceActions({ onErase: state.clear });
     syncBrush();
@@ -89,17 +99,30 @@
   };
 
   function setupGui() {
-    gui = new lil.GUI({ title: "Pilot" });
+    gui = new lil.GUI({ title: "eQuills" });
     guiControllers = [];
     const track = (controller) => {
       guiControllers.push(controller);
       return controller;
     };
 
-    const brush = gui.addFolder("Brush");
-    track(brush.add(state, "size", 8, 96, 1)).name("Size").onChange(syncBrush);
-    track(brush.add(state, "spacing", 0.04, 0.28, 0.01)).name("Spacing").onChange(syncBrush);
-    track(brush.add(state, "alpha", 0.05, 1, 0.01)).name("Alpha").onChange(syncBrush);
+    track(gui.add(state, "brushType", BRUSH_TYPES)).name("Brush").onChange(switchBrush);
+
+    const brushFolder = gui.addFolder("Brush");
+    track(brushFolder.add(state, "size", 8, 96, 1)).name("Size").onChange(syncBrush);
+    track(brushFolder.add(state, "spacing", 0.04, 0.28, 0.01)).name("Spacing").onChange(syncBrush);
+    track(brushFolder.add(state, "alpha", 0.05, 1, 0.01)).name("Alpha").onChange(syncBrush);
+
+    const pantograph = gui.addFolder("Pantógrafo");
+    track(pantograph.add(state, "scaleX", -8, 8, 0.1)).name("Escala X").onChange(syncBrush);
+    track(pantograph.add(state, "scaleY", -8, 8, 0.1)).name("Escala Y").onChange(syncBrush);
+    track(pantograph.add(state, "scalePressure", -4, 4, 0.1)).name("Escala presión").onChange(syncBrush);
+
+    const original = gui.addFolder("Línea original");
+    track(original.add(state, "originalEnabled")).name("Mostrar").onChange(syncBrush);
+    track(original.add(state, "originalSize", 1, 96, 1)).name("Tamaño").onChange(syncBrush);
+    track(original.add(state, "originalAlpha", 0.02, 1, 0.01)).name("Opacidad").onChange(syncBrush);
+    track(original.addColor(state, "originalColor")).name("Color").onChange(syncBrush);
 
     const pressure = gui.addFolder("Pressure");
     track(pressure.add(state, "pressureEnabled")).name("Enabled").onChange(syncBrush);
@@ -175,11 +198,18 @@
     syncBrush();
   }
 
+  function switchBrush(nextType) {
+    const Ctor = nextType === "pantograph" ? Pantograph : Pilot;
+    brush = new Ctor();
+    input.quill = brush;
+    syncBrush();
+  }
+
   function syncBrush() {
-    if (!pilot) return;
+    if (!brush) return;
 
     // The brush receives only rendering settings; canvas state stays in this sketch.
-    pilot.setSettings({
+    brush.setSettings({
       size: state.size,
       pressureEnabled: state.pressureEnabled,
       pressureMinScale: state.pressureMinScale,
@@ -197,7 +227,14 @@
       color: state.color,
       palette: [state.colorA, state.colorB, state.colorC, state.colorD],
       compositeOperation: state.compositeOperation,
-      alpha: state.alpha
+      alpha: state.alpha,
+      scaleX: state.scaleX,
+      scaleY: state.scaleY,
+      scalePressure: state.scalePressure,
+      originalEnabled: state.originalEnabled,
+      originalSize: state.originalSize,
+      originalColor: state.originalColor,
+      originalAlpha: state.originalAlpha
     });
   }
 

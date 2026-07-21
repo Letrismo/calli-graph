@@ -67,3 +67,38 @@ const PILOT_CONFIG = {
     alpha: 0.06
   }
 };
+
+const PANTOGRAPH_CONFIG = {
+  brush: {
+    name: "Pantograph",
+    size: 48,
+    pressureEnabled: true,
+    pressureMinScale: 0.35,
+    pressureMaxScale: 1.65,
+    pressureGamma: 1,
+    pressureOverrideEnabled: false,
+    pressureOverride: 0.5,
+    spacing: 0.04,
+    curveStep: 0.12,
+    curveSmoothing: 1,
+    smoothingAmount: 0.24,
+    simplificationAlgorithm: "visvalingam-whyatt",
+    simplificationTolerance: 2.5,
+    colorMode: "gradient",
+    color: "#f2f2f0",
+    palette: [...PILOT_PALETTES.Aurora.colors],
+    compositeOperation: PILOT_PALETTES.Aurora.compositeOperation,
+    alpha: 0.06,
+    // Ratio of transformed displacement to raw pointer displacement, applied
+    // incrementally per sample (not anchored to a fixed pivot) — negative
+    // values invert that axis.
+    scaleX: 1,
+    scaleY: 1,
+    scalePressure: 1,
+    // The original (raw pointer) line, drawn alongside the transformed mark.
+    originalEnabled: true,
+    originalSize: 24,
+    originalColor: "#ffffff",
+    originalAlpha: 0.35
+  }
+};
