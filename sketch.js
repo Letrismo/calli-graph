@@ -6,6 +6,7 @@
   let input;
   let gui;
   let guiControllers = [];
+  let brushFolders = {};
   let pressureReadout;
   let lastPressureGuiUpdate = 0;
 
@@ -156,6 +157,14 @@
     track(bristle.add(state, "maxLines", 1, 8, 1)).name("Máx. líneas").onChange(syncBrush);
     track(bristle.add(state, "spread", 0, 1, 0.01)).name("Separación").onChange(syncBrush);
 
+    brushFolders = {
+      pilot: [],
+      pantograph: [pantograph, original],
+      tether: [tether],
+      bristle: [bristle]
+    };
+    updateBrushFolderVisibility(state.brushType);
+
     const pressure = gui.addFolder("Pressure");
     track(pressure.add(state, "pressureEnabled")).name("Enabled").onChange(syncBrush);
     track(pressure.add(state, "pressureMinScale", 0.05, 1, 0.01)).name("Min scale").onChange(syncBrush);
@@ -236,7 +245,14 @@
     const Ctor = BRUSH_CTORS[nextType] || Pilot;
     brush = new Ctor();
     input.quill = brush;
+    updateBrushFolderVisibility(nextType);
     syncBrush();
+  }
+
+  function updateBrushFolderVisibility(activeType) {
+    Object.entries(brushFolders).forEach(([type, folders]) => {
+      folders.forEach((folder) => folder.show(type === activeType));
+    });
   }
 
   function syncBrush() {

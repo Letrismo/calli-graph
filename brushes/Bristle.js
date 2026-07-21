@@ -25,26 +25,33 @@ class Bristle extends StampBrush {
   // Both fan out across up to `maxLines` strands, laterally displaced
   // perpendicular to the (anchor → raw pointer) line by an amount proportional
   // to that distance. Every strand's geometry is always computed so none ever
-  // jumps when it (re)appears — only its visibility is gated by pressure: at
-  // low pressure only the centermost strand is visible, and heavier pressure
-  // progressively reveals strands outward from the center, like bristles
-  // spreading under a firmer touch.
+  // jumps when it (re)appears — only its visibility is gated by pressure, and
+  // line 2 always needs a touch more pressure than its line 1 counterpart at
+  // the same fan position. So the lightest touch draws just the centermost
+  // line 1 (one line total); a bit more pressure adds its tethered line 2;
+  // heavier pressure then opens further strands outward from the center,
+  // like bristles spreading under a firmer touch.
   renderIncrement(graphics) {
     const rawPoints = this.stroke.getLast(4);
     const count = this.mainTrails.length;
     const latest = rawPoints[rawPoints.length - 1];
     const pressure = this.resolveRenderPressure(Number.isFinite(latest.pressure) ? latest.pressure : 0.5);
     const center = (count - 1) / 2;
+    // Normalizing by (maxDistance + 0.5) — not maxDistance — keeps every
+    // threshold within [0, 1]: the outermost strand's line 2 is the largest
+    // score (maxDistance + 0.5), so it lands exactly at pressure 1, not above it.
+    const maxScore = center + 0.5;
 
     for (let i = 0; i < count; i += 1) {
-      const opening = center > 0 ? Math.abs(i - center) / center : 0;
-      const visible = pressure >= opening;
+      const distance = Math.abs(i - center);
+      const mainVisible = pressure >= distance / maxScore;
+      const offsetVisible = pressure >= (distance + 0.5) / maxScore;
 
       const mainStrand = rawPoints.map((point) => this.fanPoint(point, point, i, count));
-      this.renderCurve(graphics, mainStrand, this.mainTrails[i], visible ? this.settings : this.mutedStyle(this.settings));
+      this.renderCurve(graphics, mainStrand, this.mainTrails[i], mainVisible ? this.settings : this.mutedStyle(this.settings));
 
       const offsetStrand = rawPoints.map((point) => this.fanPoint(this.projectFromAnchor(point), point, i, count));
-      this.renderCurve(graphics, offsetStrand, this.offsetTrails[i], visible ? this.offsetStyle() : this.mutedStyle(this.offsetStyle()));
+      this.renderCurve(graphics, offsetStrand, this.offsetTrails[i], offsetVisible ? this.offsetStyle() : this.mutedStyle(this.offsetStyle()));
     }
   }
 
