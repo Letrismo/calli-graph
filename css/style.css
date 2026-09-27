@@ -29,6 +29,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   line-height: var(--leading-body);
+  overflow-x: hidden;
 }
 
 h1 {
