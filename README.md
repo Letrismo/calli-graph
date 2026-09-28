@@ -1,35 +1,27 @@
-# Calligraff.js
+*Processing Community Day 2026 · CDMX*
 
-Micrositio estático multipágina construido con Vite y Tailwind CSS.
+# calligraff.js
 
-## Desarrollo
+**Calligraphy meets code**
 
-```bash
-npm install
-npm run dev
-```
+Un encuentro sobre caligrafía digital: cómo el gesto, el trazo y el código construyen nuevas formas de escribir en pantalla.
 
-Vite mostrará la URL local. Las páginas disponibles son `/`, `/about.html` y
-`/demo.html`.
+## calligraff = caligrafía + grafo
 
-## Build
+Cuando el trazo se registra como una secuencia de puntos conectados, deja de ser una imagen estática y se convierte en una trayectoria operable: puede medirse, deformarse, transformarse reescribiéndose.
 
-```bash
-npm run build
-npm run preview
-```
+## Del píxel al gesto vectorial
 
-El sitio compilado queda en `dist/`. La configuración usa rutas relativas para
-que el mismo build funcione en un dominio propio o bajo `/<repositorio>/` en
-GitHub Pages.
+La forma de las letras siempre ha estado definida por las herramientas con las que se escriben. Uno de los últimos grandes quiebres ocurrió en los años setenta con el graffiti contemporáneo: la pared como soporte y el aerosol como herramienta.
 
-## Publicación en GitHub Pages
+Desde entonces, buena parte del software ha buscado replicar cada instrumento analógico imaginable. Añade capas, historial y tinta inagotable; pero la imitación limita la experimentación y, sin experimentación, no hay evolución.
 
-El workflow `.github/workflows/deploy-pages.yml` compila y publica cada push a
-`main`. En GitHub, selecciona **Settings → Pages → Source → GitHub Actions**.
+Los eQuills son nuestras herramientas de caligrafía digital: pinceles construidos con código para dejar marcas imposibles en el mundo físico.
 
-## Tailwind CSS
+En la primera edición, el trazo quedaba fijado en mapas de bits. En este segundo volumen, un nuevo motor registra el gesto —presión, velocidad y tiempo— y lo convierte en una trayectoria vectorial que puede seguir transformándose.
 
-Tailwind se carga desde `css/style.css`. Puedes usar sus clases directamente en
-cualquiera de los archivos HTML; no hace falta mantener una lista manual de
-archivos de contenido.
+## Edición 2026: calligraffiti: Del grafiti a las pantallas
+
+Esta edición toma la caligrafía gótica como campo de exploración. Invitamos a calígrafos especializados en *blackletter* a probar los eQuills y observar qué ocurre con un ductus tan codificado cuando la herramienta registra presión, velocidad y tiempo.
+
+Del calligraffiti al código: ¿qué sucede cuando la tradición y el algoritmo escriben juntos?
