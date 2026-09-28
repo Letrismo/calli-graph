@@ -21,100 +21,90 @@
   <body>
     <header aria-label="Navegación principal" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4">
       <a href="#inicio">
-        <img src="./img/e-quill-symbol.svg" alt="eQuills logo" width="38"/>
+        <img src="./img/e-quill-symbol.svg" alt="eQuills logo" width="38" class="w-8 md:w-10"/>
       </a>
       <nav>
-        <a class="nav-link" href="#equills">eQuills</a>
-        <a class="nav-link" href="#prueba">Demo</a>
+        <a class="nav-link" href="#equills">About</a>
         <a class="nav-link" href="#programa">Programa</a>
         <a class="nav-link" href="#proyecto">Proyecto</a>
-        <a class="nav-link" href="#cdmx">CDMX 2026</a>
       </nav>
     </header>
-    <section id="inicio" class="hero prose prose-invert xl:prose-2xl">
-      <header>
-        <p class="font-bold text-xl !p-0 !m-0">
+    <section id="inicio" class="hero prose prose-invert xl:prose-2xl" data-theme="inicio">
+      <header class="text-center ">
+        <p class="font-bold text-base md:text-lg xl:text-xl !p-0 !mt-0 !mb-2 leading-none">
           Processing Community Day
           <br>
-          <small class="year inline-flex text-xl font-bold">
+          <small class="year inline-flex font-bold">
             <span class="text-green">2</span>
             <span class="text-yellow">0</span>
             <span class="text-red">2</span>
             <span class="text-pink">6</span>
           </small>
-          CDMX
+          <small>CDMX</small>
         </p>
         <h1 class="text-orange">calligraff.js</h1>
-        <p class="text-3xl font-semibold">Calligraphy Meets Code</p>
+        <p class="!mb-0 text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold">Calligraphy Meets Code</p>
       </header>
-      <p>Un encuentro sobre caligrafía digital como medio de exploración para construir nuevas formas de escritura a partir del gesto, el trazo y el código.</p>
-      <footer>
-        <a class="nav-link" href="#encuentro">Participa</a>
-        <a class="nav-link" href="#equills">Conoce más</a>
+      <p class="text-left md:text-center !my-6 mx-auto">Un encuentro sobre caligrafía digital como medio de exploración para construir nuevas formas de escritura a partir del gesto, el trazo y el código.</p>
+      <footer class="mt-4 flex gap-4 w-full items-center justify-center">
+        <a class="nav-link min-w-32" href="#equills">Conoce más</a>
+        <a class="nav-link min-w-32" href="#encuentro">Participa</a>
       </footer>
     </section>
 
     <main class="prose prose-invert xl:prose-2xl ">
-        <section id="equills">
-          <header>
-            <h2>eQuills · Volumen 2</h2>
-            <p>Del píxel al vector</p>
+        <section id="equills" data-theme="equills">
+          <header class="text-center">
+            <h2>eQuills · 2.0</h2>
+            <p>Del píxel al Vector</p>
           </header>
           <p>La forma de las letras siempre ha estado definida por las herramientas que usamos para escribirlas.</p>
-          <p>eQuills explora herramientas digitales de escritura capaces de producir marcas imposibles de crear en el mundo físico. En este segundo volumen, <em>calligraff.js</em> continúa la investigación pasando del raster de píxeles de la primera edición al registro vectorial del gesto.</p>
-          <footer>
-            <a class="nav-link" href="#equills">Explora eQuills 1.0</a>
+          <p>eQuills explora herramientas digitales de escritura capaces de producir marcas imposibles de crear en el mundo físico.</p>
+          <p>En este segundo volumen, <em>calligraff.js</em> continúa la investigación pasando del raster de píxeles de la primera edición al registro vectorial del gesto.</p>
+          <footer class="w-full flex gap-4 justify-center max-w-lg mx-auto">
+            <a class="nav-link w-1/2 text-center" href="https://equills.letrismo.com/" target="_blank">Conoce eQuills v1.0</a>
+            <a class="nav-link w-1/2 text-center" href="https://equills.letrismo.com/" target="_blank">Prueba eQuills v2.0</a>
           </footer>
         </section>
 
-        <section id="prueba">
-          <header>
-            <h2>Prueba <em>calligraff.js</em></h2>
-            <p>El gesto convertido en herramienta</p>
+        <section id="encuentro" data-theme="encuentro">
+          <header class="text-center">
+            <h2>pcd · cdmx · 2026</h2>
+            <p>25 aniversario de Processing</p>
           </header>
-          <p>Traza, modifica parámetros y observa cómo el movimiento transforma la forma de la escritura.</p>
-          <footer>
-            <a class="nav-link" href="./demo.html">Prueba el demo</a>
-            <a class="nav-link" href="./sketch.js">Ver código</a>
-          </footer>
-        </section>
-
-        <section id="encuentro">
-          <h2>Un encuentro para escribir con código</h2>
           <p>En el marco del 25 aniversario de Processing, preparamos un encuentro en Ciudad de México para compartir procesos, probar herramientas y experimentar en conjunto.</p>
-          <footer>
-            <a class="nav-link" href="#cdmx">Participa</a>
+          <ul>
+            <li>
+              <h3>Charla</h3>
+              <p>El vínculo entre herramienta, gesto y forma a través de los dos volúmenes de eQuills.</p>
+            </li>
+            <li>
+              <h3>Jam | Live coding</h3>
+              <p>
+                Artistas y letristas exploran las herramientas desde su propia práctica. <br>
+                Sketches y brushes construidos y modificados en tiempo real.
+              </p>
+            </li>
+            <li>
+              <h3>Workshop</h3>
+              <p>Una sesión para probar, modificar y construir tu propio eQuill. <br><small class="italic">*Cupo limitado</small></p>
+            </li>
+          </ul>
+          <footer class="w-full flex gap-4 justify-center max-w-lg mx-auto">
+            <a class="nav-link w-1/2 text-center" href="#programa">Participa</a>
+            <a class="nav-link w-1/2 text-center" href="#programa">Regístrate</a>
           </footer>
         </section>
 
-        <section id="programa">
-          <h2>Programa</h2>
-          <h3>Charla</h3>
-          <p>El vínculo entre herramienta, gesto y forma a través de los dos volúmenes de eQuills.</p>
-          <h3>Live coding</h3>
-          <p>Sketches y brushes construidos y modificados en tiempo real.</p>
-          <h3>Jam</h3>
-          <p>Artistas y letristas exploran las herramientas desde su propia práctica.</p>
-          <h3>Workshop</h3>
-          <p>Una sesión para probar, modificar y construir herramientas digitales de escritura.</p>
-          <footer>
-            <a class="nav-link" href="#programa">Conoce el programa</a>
-          </footer>
-        </section>
-
-        <section id="proyecto">
-          <h2>Sobre el proyecto</h2>
-          <p><em>calligraff.js</em> es el segundo volumen de eQuills, desarrollado por Andrés Ochoa, Andrew Alva, Eli Ramos y Juan Fuentes.</p>
-          <footer>
-            <a class="nav-link" href="#proyecto">Conoce al equipo</a>
-          </footer>
-        </section>
-
-        <section id="cdmx">
-          <h2>Ciudad de México · 2026</h2>
-          <p>Fecha y sede por confirmar.</p>
-          <footer>
-            <a class="nav-link" href="#proyecto">Sigue el proyecto</a>
+        <section id="proyecto" data-theme="proyecto">
+          <header class="text-center">
+            <h2>Sobre el proyecto</h2>
+          </header>
+          <p>Mediante el uso de lenguajes de programación <a target="_blank" href="https://instagram.com/Typebrain">Andrés Ochoa</a>, <a target="_blank" href="https://instagram.com/Andrew__Alva/">Andrew Alva</a>, <a target="_blank" href="https://instagram.com/JuanFuent.es">Juan Fuentes</a> y <a target="_blank" href="https://instagram.com/_elibbit_/">Eli Ramos</a>, nos encontramos desarrollando herramientas de escritura digitales que buscan dejar marcas imposibles de crear en el mundo físico. Las hemos denominado "eQuills" y en este sitio web podrás utilizarlas. Estamos ansiosos de que letristas alrededor del mundo las usen, escuchar sus opiniones y ver las nuevas e increíbles formas que resultarán de esta 'nueva caligrafía'.</p>
+          <p>Traza, modifica parámetros y observa cómo el movimiento transforma la forma de la escritura.</p>
+          <footer class="w-full flex gap-4 justify-center max-w-lg mx-auto">
+            <a class="nav-link w-1/2 text-center"  href="./demo.html">Prueba el demo</a>
+            <a class="nav-link w-1/2 text-center"  href="./sketch.js">Ver código</a>
           </footer>
         </section>
 
