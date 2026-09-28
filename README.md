@@ -20,7 +20,7 @@ Los eQuills son nuestras herramientas de caligrafía digital: pinceles construid
 
 En la primera edición, el trazo quedaba fijado en mapas de bits. En este segundo volumen, un nuevo motor registra el gesto —presión, velocidad y tiempo— y lo convierte en una trayectoria vectorial que puede seguir transformándose.
 
-## Edición 2026: calligraffiti: De la pared a las pantallas
+## Edición 2026: calligraffiti digital: De la pared a las pantallas
 
 Esta edición toma la caligrafía gótica como campo de exploración. Invitamos a calígrafos especializados en *blackletter* a probar los eQuills y observar qué ocurre con un ductus tan codificado cuando la herramienta registra presión, velocidad y tiempo.
 
