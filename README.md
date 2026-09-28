@@ -1,12 +1,12 @@
+
 *Processing Community Day 2026 · CDMX*
 
-# calligraff.js
-
+# calligraff.js | eQuills v2.0
 **Calligraphy meets code**
 
-Un encuentro sobre caligrafía digital: cómo el gesto, el trazo y el código construyen nuevas formas de escribir en pantalla.
+Un encuentro sobre **caligrafía digital**: cómo el **gesto, el trazo y el código** construyen nuevas formas de escribir en pantalla.
 
-## calligraff = caligrafía + grafo
+*calligraff = caligrafía + grafo*
 
 Cuando el trazo se registra como una secuencia de puntos conectados, deja de ser una imagen estática y se convierte en una trayectoria operable: puede medirse, deformarse, transformarse reescribiéndose.
 
