@@ -28,7 +28,7 @@ Esta edición toma la caligrafía gótica como campo de exploración. Invitamos 
 
 De la caligrafía al código: ¿Qué sucede cuando la tradición y el algoritmo escriben juntos?
 
-=================================
+---
 ## Requerimientos para el evento.
 
 ### Charla.
@@ -44,7 +44,7 @@ Espacio de taller con mesas de trabajo (idealmente mesas para mínimo 2 personas
 - Hojas de papel, lápices, borradores, plumas, plumones, etc.
 
 
-================================================
+---
 ## Ideales y deseos para mejorar la experiencia.
 
 ### Jam.
