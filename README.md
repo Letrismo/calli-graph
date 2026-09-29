@@ -27,3 +27,29 @@ En la primera edición, el trazo quedaba fijado en mapas de bits. En este segund
 Esta edición toma la caligrafía gótica como campo de exploración. Invitamos a calígrafos especializados en *blackletter* a probar los eQuills y observar qué ocurre al codificar el ductus, qué podemos aprender de él y a qué conclusiones nos puede llevar registrar la presión, velocidad y tiempo de su ejecución.
 
 De la caligrafía al código: ¿Qué sucede cuando la tradición y el algoritmo escriben juntos?
+
+=================================
+## Requerimientos para el evento.
+
+### Charla.
+Un foro o espacio apto para dar pláticas o talleres para N número de personas:
+- 1 Pantalla.
+- "N" Sillas.
+
+### Jam.
+Espacio de taller con mesas de trabajo (idealmente mesas para mínimo 2 personas) y conexiones eléctricas para laptops y tabletas gráficas; además de papel, lápices, borradores, plumas que faciliten el intercambio de ideas:
+- "N" mesas.
+- "N x 2" sillas.
+- Conexiones / extensiones eléctricas.
+- Hojas de papel, lápices, borradores, plumas, plumones, etc.
+
+
+================================================
+## Ideales y deseos para mejorar la experiencia.
+
+### Jam.
+#### Stage / Display.
+*[Escenario / Proyección / Pantalla principal]* con estación de trabajo donde se pueda mostrar a mayor escala lo que desarrolla cada "equipo" o "dupla" al final de la sesión. Imaginamos que este escenario cuente con una proyección de mayor tamaño a una televisión (p. ej. 4m de ancho x 2.25m de alto).
+
+#### Estaciones de trabajo.
+Podemos realizar el taller haciendo que cada persona traiga su computadora y/o tableta gráfica según corresponda (letrista / programador); pero en caso de contar con el material necesario y de acuerdo a la cantidad deseada de asistentes, podríamos mejorar la experiencia
