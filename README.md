@@ -56,4 +56,4 @@ https://github.com/Letrismo/calligraff/blob/473d4e2ac1e27233eb88ce5c563655a31ee8
 #### Estaciones de trabajo.
 Podemos realizar el taller haciendo que cada persona traiga su computadora y/o tableta gráfica según corresponda (letrista / programador); pero en caso de contar con el material necesario y de acuerdo a la cantidad deseada de asistentes, podríamos mejorar la experiencia brindando una estación de trabajo a cada "equipo" con pantallas medianas que faciliten la colaboración entre todos los equipos y aumenten la visibilidad de lo que se está realizando.
 
-https://github.com/Letrismo/calligraff/blob/473d4e2ac1e27233eb88ce5c563655a31ee836b3/videos/02-estaciones-trabajo.mp4
+https://github.com/user-attachments/assets/70282869-f0a6-4688-9eeb-7901b2cbeaaa
