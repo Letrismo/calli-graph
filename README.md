@@ -51,7 +51,7 @@ Espacio de taller con mesas de trabajo (idealmente mesas para mínimo 2 personas
 #### Stage / Display.
 *[Escenario / Proyección / Pantalla principal]* con estación de trabajo donde se pueda mostrar a mayor escala lo que desarrolla cada "equipo" o "dupla" al final de la sesión. Imaginamos que este escenario cuente con una proyección de mayor tamaño a una televisión (p. ej. 4m de ancho x 2.25m de alto).
 
-https://github.com/Letrismo/calligraff/blob/473d4e2ac1e27233eb88ce5c563655a31ee836b3/videos/01-stage-display.mp4
+https://github.com/user-attachments/assets/4ae55d7c-d63e-4354-8104-9e17d8bfc989
 
 #### Estaciones de trabajo.
 Podemos realizar el taller haciendo que cada persona traiga su computadora y/o tableta gráfica según corresponda (letrista / programador); pero en caso de contar con el material necesario y de acuerdo a la cantidad deseada de asistentes, podríamos mejorar la experiencia brindando una estación de trabajo a cada "equipo" con pantallas medianas que faciliten la colaboración entre todos los equipos y aumenten la visibilidad de lo que se está realizando.
