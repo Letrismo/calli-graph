@@ -1,12 +1,12 @@
 
 *Processing Community Day 2026 · CDMX*
 
-# calligraff.js | eQuills v2.0
+# calligraph.js | eQuills v2.0
 **Calligraphy meets code**
 
 Un encuentro sobre **caligrafía digital**: cómo el **gesto, el trazo y el código** construyen nuevas formas de escribir en pantalla.
 
-*calligraff = caligrafía + grafo matemático*
+*<calli—graph> = caligrafía + grafo matemático*
 
 Un grafo matemático es un conjunto de nodos enlazados por aristas que permiten representar relaciones entre elementos. Esta matemática es utilizada por ejemplo, para encontrar el recorrido más eficiente entre dos puntos en los mapas de navegación de nuestros teléfonos.
 
