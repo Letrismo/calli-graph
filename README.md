@@ -12,6 +12,8 @@ Un grafo matemático es un conjunto de nodos enlazados por aristas que permiten 
 
 En el caso de la caligrafía, cuando un trazo queda registrado computacionalmente como un grafo, deja de ser una imagen estática y se convierte en una trayectoria operable: puede medirse, deformarse, animarse y reescribirse.
 
+Un trazo caligráfico registrado como grafo es una trayectoria computacional formada por nodos, relaciones y atributos temporales. Cada nodo conserva una muestra del gesto; cada arista conserva la relación entre una muestra y la siguiente. Eso permite analizar el ductus, reconstruir el movimiento, alterar la forma y generar salidas visuales que no dependen de imitar una herramienta física.
+
 ## Del píxel al gesto vectorial
 
 La forma de las letras siempre ha estado definida por las herramientas con las que se escriben. Uno de los últimos grandes quiebres ocurrió en los años setenta con el graffiti contemporáneo: la pared como soporte y el aerosol como herramienta.

@@ -14,7 +14,7 @@
       content="Encuentro en Ciudad de México para Processing Community Day 2026: charla, live coding y workshop sobre caligrafía digital, gesto y código, con eQuills v2.0."
     />
     <meta property="og:image" content="https://letrismo.github.io/calligraff/img/calligraff.js-equills-pcd-25.png" />
-    <title>&#x3C;calli-graph&#x3E; | Caligrafía y código</title>
+    <title>calligraff.js | Caligrafía y código</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
@@ -32,8 +32,8 @@
       </nav>
     </header>
     <section id="inicio" class="hero prose prose-invert xl:prose-2xl" data-theme="inicio">
-      <header class="text-center pt-20">
-        <p class="font-bold text-base md:text-lg xl:text-xl !p-0 !m-0 leading-none">
+      <header class="text-center py-20">
+        <p class="font-bold text-base md:text-lg xl:text-xl !p-0 !mt-0 !mb-2 leading-none">
           Processing Community Day
           <br>
           <small class="year inline-flex font-bold">
@@ -44,46 +44,35 @@
           </small>
           <small>CDMX</small>
         </p>
-        <h1 class="text-orange">&#x3C;calli-graph&#x3E;</h1>
-        <p class="!mb-0 text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold">Calligraphy Meets Computation</p>
-        <p class="text-left md:text-center mx-auto text-balance max-w-3xl">
-          Un encuentro sobre caligrafía digital: cómo el gesto, el trazo y el código construyen nuevas formas de escribir en pantalla.
-        </p>
+        <h1 class="text-orange">calligraff.js</h1>
+        <p class="!mb-0 text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold">Calligraphy Meets Code</p>
       </header>
+      <p class="text-left md:text-center !my-6 mx-auto">
+        Un encuentro sobre caligrafía digital: cómo el gesto, el trazo y el código construyen nuevas formas de escribir en pantalla.
+        <b class="italic block">calligraff = caligrafía + grafo</b>
+        <small class="block">Cuando el trazo se registra como una secuencia de puntos conectados, deja de ser una imagen estática y se convierte en una trayectoria operable: puede medirse, deformarse, animarse y reescribirse.</small>
+      </p>
       <footer class="mt-4 flex gap-4 w-full items-center justify-center">
         <a class="nav-link min-w-32" href="#equills">Conoce más</a>
         <a class="nav-link min-w-32" href="#encuentro">Participa</a>
       </footer>
     </section>
 
-    <main class="prose prose-invert xl:prose-xl !max-w-4xl mx-auto">
+    <main class="prose prose-invert xl:prose-2xl ">
         <section id="equills" data-theme="equills">
-          <article>
-            <header class="text-center">
-              <h2>eQuills · 2.0</h2>
-              <p>&#x3C;calli-graph&#x3E; = caligrafía + grafos</p>
-            </header>
-              <p>La forma de las letras siempre ha estado definida por las herramientas que usamos para escribirlas. eQuills explora herramientas digitales de escritura capaces de producir marcas imposibles de crear en el mundo físico.</p>
-              <p>En este segundo volumen, la investigación continúa pasando del raster de píxeles al registro caligráfico por grafos. En matemáticas y ciencias computacionales, un grafo es una estructura de nodos y relaciones que permite representar recorridos, conexiones y transformaciones.</p>
-              <p>Registrar un trazo como grafo significa conservarlo como una trayectoria computacional. Así, la escritura deja de ser una imagen fija y se vuelve operable: puede medirse, reconstruirse, deformarse, animarse y reescribirse.</p>
-            <footer>
-              <nav class="w-full flex gap-4 justify-center max-w-lg mx-auto mt-8">
-                <a class="nav-link w-1/2 text-center" href="https://equills.letrismo.com/" target="_blank">Conoce eQuills v1.0</a>
-                <a class="nav-link w-1/2 text-center" href="https://equills.letrismo.com/" target="_blank">Prueba eQuills v2.0</a>
-              </nav>
-            </footer>
-          </article>
+          <header class="text-center">
+            <h2>eQuills · 2.0</h2>
+            <p>Del píxel al Vector</p>
+          </header>
+          <p>La forma de las letras siempre ha estado definida por las herramientas que usamos para escribirlas.</p>
+          <p>eQuills explora herramientas digitales de escritura capaces de producir marcas imposibles de crear en el mundo físico.</p>
+          <p>En este segundo volumen, <em>calligraff.js</em> continúa la investigación pasando del raster de píxeles de la primera edición al registro vectorial del gesto.</p>
+          <footer class="w-full flex gap-4 justify-center max-w-lg mx-auto">
+            <a class="nav-link w-1/2 text-center" href="https://equills.letrismo.com/" target="_blank">Conoce eQuills v1.0</a>
+            <a class="nav-link w-1/2 text-center" href="https://equills.letrismo.com/" target="_blank">Prueba eQuills v2.0</a>
+          </footer>
         </section>
 
-        <section id="gotica-digital">
-          <article>
-            <header class="text-center">
-              <h2>gótica digital</h2>
-              <p>eQuills - Edición 2026</p>
-            </header>
-            <p>Esta edición toma la caligrafía gótica como campo de exploración. Invitamos a calígrafos especializados en blackletter a probar los eQuills y observar qué ocurre al codificar el ductus, qué podemos aprender de él y a qué conclusiones nos puede llevar registrar la presión, velocidad y tiempo de su ejecución.</p>
-          </article>
-        </section>
         <section id="encuentro" data-theme="encuentro">
           <header class="text-center">
             <h2>pcd · cdmx · 2026</h2>
@@ -102,6 +91,10 @@
                 Sketches y brushes construidos y modificados en tiempo real.
               </p>
             </li>
+            <li>
+              <h3>Workshop</h3>
+              <p>Una sesión para probar, modificar y construir tu propio eQuill. <br><small class="italic">*Cupo limitado</small></p>
+            </li>
           </ul>
           <footer class="w-full flex gap-4 justify-center max-w-lg mx-auto">
             <a class="nav-link w-1/2 text-center" href="#programa">Participa</a>
@@ -111,7 +104,7 @@
 
         <section id="proyecto" data-theme="proyecto">
           <header class="text-center">
-            <h2>Acerca:</h2>
+            <h2>Sobre el proyecto</h2>
           </header>
           <p>Mediante el uso de lenguajes de programación <a target="_blank" href="https://instagram.com/Typebrain">Andrés Ochoa</a>, <a target="_blank" href="https://instagram.com/Andrew__Alva/">Andrew Alva</a>, <a target="_blank" href="https://instagram.com/JuanFuent.es">Juan Fuentes</a> y <a target="_blank" href="https://instagram.com/_elibbit_/">Eli Ramos</a>, nos encontramos desarrollando herramientas de escritura digitales que buscan dejar marcas imposibles de crear en el mundo físico. Las hemos denominado "eQuills" y en este sitio web podrás utilizarlas. Estamos ansiosos de que letristas alrededor del mundo las usen, escuchar sus opiniones y ver las nuevas e increíbles formas que resultarán de esta 'nueva caligrafía'.</p>
           <p>Traza, modifica parámetros y observa cómo el movimiento transforma la forma de la escritura.</p>
