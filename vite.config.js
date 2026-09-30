@@ -12,8 +12,7 @@ function staticDemoFiles() {
     ["js/ui-actions.js", "ui-actions.js"],
     ["manifest.webmanifest", "manifest.webmanifest"],
     ["img/icon.svg", "icon.svg"],
-    ["img/pilot.png", "pilot.png"],
-    ["img/calligraff.js-equills-pcd-25.png", "img/calligraff.js-equills-pcd-25.png"],
+    ["img/calli-graph-equills-pcd-25.png", "img/calli-graph-equills-pcd-25.png"],
   ];
 
   for (const directory of ["js/brushes", "js/core", "js/renderers"]) {
