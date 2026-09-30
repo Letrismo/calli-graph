@@ -18,7 +18,8 @@
   --text-body: 1rem;
   --text-h1: max(16.5vw, 4.75rem);
   --text-h2: max(10vw, 2.5rem);
-  --text-h3: 2.5rem;
+  --text-h3: max(5vw, 2rem);
+  --text-h4: max(3vw, 1.5rem);
 
   --leading-body: 1.64;
 }
@@ -97,7 +98,7 @@ body {
   --tw-prose-th-borders: var(--page-text);
   --tw-prose-td-borders: var(--page-text);
 }
-h1, h2 {
+h1, h2, h3, h4 {
   font-family: var(--font-title);
   font-weight: 100;
   text-align: center;
@@ -114,6 +115,14 @@ h2 {
   font-size: var(--text-h2);
   margin-top: 0;
   margin-bottom: 0;
+}
+
+h3 {
+  font-size: var(--text-h3);
+}
+
+h4 {
+  font-size: var(--text-h4);
 }
 
 h2 + p {
