@@ -9,6 +9,7 @@ function staticDemoFiles() {
   const files = [
     ["js/config.js", "config.js"],
     ["sketch.js", "sketch.js"],
+    ["gotica-sketch.js", "gotica-sketch.js"],
     ["js/ui-actions.js", "ui-actions.js"],
     ["manifest.webmanifest", "manifest.webmanifest"],
     ["img/icon.svg", "icon.svg"],
@@ -69,6 +70,7 @@ export default defineConfig({
       input: {
         home: resolve(projectRoot, "index.html"),
         demo: resolve(projectRoot, "demo.html"),
+        gotica: resolve(projectRoot, "gotica.html"),
       },
     },
   },

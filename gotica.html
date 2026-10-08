@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="description" content="eQuill Gótica: pluma de punta ancha con controles imposibles para componer el póster de calli-graph y exportarlo en SVG." />
+  <meta name="application-name" content="eQuills Gótica" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="eQuills Gótica" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0d0d0d" />
+  <meta property="og:title" content="eQuills / Gótica" />
+  <meta property="og:description" content="Pluma gótica de punta ancha: deriva de ángulo, puntas múltiples, fractura y grafo del ductus. Exporta SVG a tamaño de impresión." />
+  <title>eQuills / Gótica</title>
+  <link rel="manifest" href="./manifest.webmanifest" vite-ignore />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" vite-ignore />
+  <link rel="apple-touch-icon" href="./pilot.png" vite-ignore />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <main class="app-shell" aria-label="eQuills Gótica">
+    <section class="canvas-stage" aria-label="Lienzo de dibujo">
+      <div id="app" class="canvas-mount"></div>
+    </section>
+    <div class="app-actions" aria-label="Acciones del lienzo">
+      <button class="action-button action-button--icon" type="button" data-action="fullscreen" aria-label="Pantalla completa" title="Pantalla completa"></button>
+      <button class="action-button" type="button" data-action="undo" title="Deshacer (⌘Z)">Deshacer</button>
+      <button class="action-button" type="button" data-action="export" title="Descargar el póster en SVG a tamaño real">SVG</button>
+      <button class="action-button" type="button" data-action="erase">Limpiar</button>
+    </div>
+  </main>
+  <noscript>Activa JavaScript para usar el eQuill Gótica.</noscript>
+  <!-- Runtime libraries -->
+  <script defer src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lil-gui@0.19.2/dist/lil-gui.umd.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/pressure@2.2.0/dist/pressure.min.js"></script>
+  <!-- eQuills runtime -->
+  <script defer src="./core/PressureInput.js" vite-ignore></script>
+  <script defer src="./core/Sample.js" vite-ignore></script>
+  <script defer src="./core/Stroke.js" vite-ignore></script>
+  <script defer src="./core/PathProcessing.js" vite-ignore></script>
+  <script defer src="./core/CalligraphyGuides.js" vite-ignore></script>
+  <script defer src="./core/EQuill.js" vite-ignore></script>
+  <script defer src="./core/PointerInput.js" vite-ignore></script>
+  <script defer src="./renderers/BroadNibGeometry.js" vite-ignore></script>
+  <script defer src="./renderers/BroadNibRenderer.js" vite-ignore></script>
+  <script defer src="./renderers/BroadNibSvg.js" vite-ignore></script>
+  <script defer src="./brushes/Gotica.js" vite-ignore></script>
+  <script defer src="./ui-actions.js" vite-ignore></script>
+  <script defer src="./gotica-sketch.js" vite-ignore></script>
+</body>
+</html>
