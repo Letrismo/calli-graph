@@ -7,4 +7,4 @@
 - ¿Qué pasa si la inclinación de la pluma está cambiando de manera constante?
 
 #### Desde la programación.
-- 
+- Piensa / Inventa un nuevo "brush" pensando en "comportamientos", hazlo directamente con código, no hagas el trazo en papel para traducirlo a la pantalla, experimenta con tu imaginación y definiendo parámetros.
