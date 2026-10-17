@@ -16,7 +16,7 @@
   --color-white: #fbfbfb;
 
   --text-body: 1rem;
-  --text-h1: max(16.5vw, 4.75rem);
+  --text-h1: max(5vw, 1.75rem);
   --text-h2: max(10vw, 2.5rem);
   --text-h3: max(5vw, 2rem);
   --text-h4: max(3vw, 1.5rem);
@@ -148,8 +148,6 @@ main,
 }
 
 .hero img {
-  width: 90%;
-  max-width: 340px;
   margin: 0 auto;
 }
 
