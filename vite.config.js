@@ -9,6 +9,7 @@ function staticDemoFiles() {
   const files = [
     ["js/config.js", "config.js"],
     ["sketch.js", "sketch.js"],
+    ["gotica-sketch.js", "gotica-sketch.js"],
     ["js/ui-actions.js", "ui-actions.js"],
     ["manifest.webmanifest", "manifest.webmanifest"],
     ["img/icon.svg", "icon.svg"],
@@ -28,8 +29,26 @@ function staticDemoFiles() {
     }
   }
 
+  // Same mapping for `npm run dev`: the demo pages request ./config.js, ./core/*.js…
+  // (their build-output paths), which don't exist at the project root — without this
+  // the dev server answers with the index.html fallback and the demo never loads.
+  const devRoutes = new Map(files.map(([sourceFile, outputFile]) => ["/" + outputFile.split(sep).join("/"), sourceFile]));
+
   return {
     name: "static-demo-files",
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const sourceFile = devRoutes.get((req.url ?? "").split("?")[0]);
+        if (!sourceFile) return next();
+        const type = sourceFile.endsWith(".js") ? "text/javascript"
+          : sourceFile.endsWith(".svg") ? "image/svg+xml"
+          : sourceFile.endsWith(".png") ? "image/png"
+          : sourceFile.endsWith(".webmanifest") ? "application/manifest+json"
+          : "application/octet-stream";
+        res.setHeader("Content-Type", type);
+        res.end(readFileSync(resolve(projectRoot, sourceFile)));
+      });
+    },
     buildStart() {
       for (const [sourceFile, outputFile] of files) {
         this.emitFile({
@@ -51,6 +70,7 @@ export default defineConfig({
       input: {
         home: resolve(projectRoot, "index.html"),
         demo: resolve(projectRoot, "demo.html"),
+        gotica: resolve(projectRoot, "gotica.html"),
       },
     },
   },
