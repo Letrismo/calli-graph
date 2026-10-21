@@ -65,6 +65,15 @@ export default defineConfig({
   // Las rutas relativas permiten publicar el build bajo /<repositorio>/.
   base: "./",
   plugins: [tailwindcss(), staticDemoFiles()],
+  server: {
+    // Development requests use Vite's origin; production calls the public API directly.
+    proxy: {
+      "/api/events": {
+        target: "https://centro.juanfuent.es",
+        changeOrigin: true,
+      },
+    },
+  },
   build: {
     rollupOptions: {
       input: {

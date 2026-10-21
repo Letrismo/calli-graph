@@ -5,6 +5,21 @@ import { RegistrationApi, RegistrationError } from "./registration-api.js";
 const registration = { full_name: "María Pérez López", email: "maria@example.test" };
 const api = (fetcher) => new RegistrationApi({ fetcher });
 
+test("the default fetcher preserves the browser receiver for GET and POST", async (t) => {
+  const methods = [];
+  t.mock.method(globalThis, "fetch", function (url, options) {
+    assert.equal(this, globalThis, "native Window.fetch rejects a different receiver");
+    methods.push(options.method ?? "GET");
+    return Promise.resolve(options.method === "POST"
+      ? new Response(null, { status: 201 })
+      : Response.json({ remaining: 100, available: true }));
+  });
+  const service = new RegistrationApi();
+  await service.availability();
+  await service.register(registration);
+  assert.deepEqual(methods, ["GET", "POST"]);
+});
+
 test("availability uses the event URL without cookies or cache", async () => {
   const service = api(async (url, options) => {
     assert.equal(url, "https://centro.juanfuent.es/api/events/caligraf-2026/availability");

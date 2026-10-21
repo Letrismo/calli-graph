@@ -11,9 +11,11 @@ export class RegistrationError extends Error {
 
 export class RegistrationApi {
   constructor({
-    availabilityUrl = `${EVENT_URL}/availability`,
-    registrationUrl = `${EVENT_URL}/registrations`,
-    fetcher = globalThis.fetch,
+    baseUrl = EVENT_URL,
+    availabilityUrl = `${baseUrl}/availability`,
+    registrationUrl = `${baseUrl}/registrations`,
+    // Window.fetch requires its browser receiver; calling it as this.fetcher is invalid.
+    fetcher = (...args) => globalThis.fetch(...args),
   } = {}) {
     this.availabilityUrl = availabilityUrl;
     this.registrationUrl = registrationUrl;

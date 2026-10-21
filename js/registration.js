@@ -113,6 +113,7 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
 const root = typeof document !== "undefined" && document.querySelector("[data-registration]");
 if (root) {
   initializeRegistration(root, new RegistrationApi({
+    baseUrl: import.meta.env.DEV ? "/api/events/caligraf-2026" : undefined,
     availabilityUrl: import.meta.env.VITE_REGISTRATION_AVAILABILITY_URL || undefined,
     registrationUrl: import.meta.env.VITE_REGISTRATION_URL || undefined,
   }));
