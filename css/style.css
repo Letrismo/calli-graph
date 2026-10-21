@@ -17,6 +17,31 @@
   --color-white: #fbfbfb;
 }
 
+html {
+  color-scheme: dark;
+  scrollbar-color: #444 var(--color-bg);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid var(--color-bg);
+  border-radius: 999px;
+  background: #444;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-bg);
+}
+
 h2,
 main h2 {
   margin: 0;
