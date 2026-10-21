@@ -125,5 +125,19 @@ test("availability failure can be retried", async () => {
   assert.equal(calls, 2);
   assert.equal(ui.fields.disabled, false);
   assert.equal(ui.retry.hidden, true);
-  assert.match(ui.status.textContent, /Queda 1 lugar disponible/);
+  assert.equal(ui.status.textContent, "Completa tus datos.");
+});
+
+test("blank or whitespace-only fields never send a registration", async () => {
+  for (const values of [["", ""], ["   ", "maria@example.test"], ["María", "   "]]) {
+    const ui = fixture();
+    let submissions = 0;
+    await initializeRegistration(ui.root, {
+      availability: async () => available,
+      register: async () => { submissions += 1; },
+    });
+    [ui.inputs.full_name.value, ui.inputs.email.value] = values;
+    await ui.form.trigger("submit");
+    assert.equal(submissions, 0);
+  }
 });

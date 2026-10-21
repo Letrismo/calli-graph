@@ -11,13 +11,13 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
   let full = false;
   let confirmed = false;
 
-  function showAvailability({ remaining, available }) {
+  function showAvailability({ available }) {
     full = !available;
     fields.disabled = full || confirmed;
     if (confirmed) {
-      status.textContent = `Tu registro fue confirmado. ¡Nos vemos en CENTRO! ${full ? "Cupo completo." : `Lugares restantes: ${remaining}.`}`;
+      status.textContent = "Tu registro fue confirmado. ¡Nos vemos en CENTRO!";
     } else {
-      status.textContent = full ? "Cupo completo" : `${remaining === 1 ? "Queda 1 lugar disponible" : `Quedan ${remaining} lugares disponibles`}. Completa tus datos para registrarte.`;
+      status.textContent = full ? "Cupo completo" : "Completa tus datos.";
     }
   }
 
@@ -37,7 +37,7 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
     busy = true;
     retry.hidden = true;
     fields.disabled = true;
-    status.textContent = "Consultando lugares disponibles…";
+    status.textContent = "Preparando registro…";
     try {
       showAvailability(await api.availability());
     } catch {
@@ -57,7 +57,8 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
       input.value = input.value.trim();
       input.setCustomValidity(input.value ? "" : "Completa este campo.");
     });
-    if (!form.reportValidity()) return;
+    const valid = form.reportValidity();
+    if (!valid || inputs.some((input) => !input.value)) return;
 
     const registration = Object.fromEntries(inputs.map((input) => [input.name, input.value]));
     busy = true;
@@ -76,7 +77,6 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
         showAvailability(await api.availability());
       } catch {
         // Availability failure must never replace a successful registration.
-        status.textContent += " No pudimos actualizar los lugares disponibles.";
       }
     } catch (error) {
       if (error.status === 409 && error.code === "event_full") {

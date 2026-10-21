@@ -22,6 +22,20 @@ html {
   scrollbar-color: #444 var(--color-bg);
 }
 
+.action-pair {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+@media (min-width: 40rem) {
+  .action-pair {
+    width: fit-content;
+    grid-template-columns: repeat(2, 8rem);
+  }
+}
+
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
@@ -47,9 +61,23 @@ main h2 {
   margin: 0;
   padding: 0;
   font-family: var(--font-title);
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(4.5rem, 24vw, 6rem);
   font-weight: 300;
   line-height: 0.95;
   letter-spacing: 0;
   padding-bottom: 0.5rem;
+}
+
+@media (min-width: 40rem) {
+  h2,
+  main h2 {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  h2,
+  main h2 {
+    font-size: clamp(3rem, 7vw, 6rem);
+  }
 }
