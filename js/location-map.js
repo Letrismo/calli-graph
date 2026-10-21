@@ -1,4 +1,5 @@
 const container = document.querySelector('#venue-map');
+const googleMapsUrl = 'https://maps.app.goo.gl/pN7iXp46H9ptJ5oCA';
 
 async function initializeMap() {
   const status = document.querySelector('[data-map-status]');
@@ -34,7 +35,8 @@ async function initializeMap() {
 
     const marker = document.createElement('a');
     marker.className = 'block h-12 w-11 text-orange drop-shadow-lg';
-    marker.href = document.querySelector('[data-map-link]').href;
+    // Keep the map independent of address links elsewhere in the page.
+    marker.href = googleMapsUrl;
     marker.target = '_blank';
     marker.rel = 'noopener noreferrer';
     marker.setAttribute('aria-label', 'Abrir ubicación de CENTRO en Google Maps');
@@ -48,7 +50,8 @@ async function initializeMap() {
       }
     });
     map.on('idle', () => { status.hidden = true; });
-  } catch {
+  } catch (error) {
+    console.error('No se pudo inicializar el mapa de CENTRO:', error);
     map?.remove();
     status.hidden = false;
     status.textContent = 'No se pudo cargar el mapa. Abre la ubicación en Google Maps.';
