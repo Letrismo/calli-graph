@@ -14,6 +14,8 @@ function staticDemoFiles() {
     ["manifest.webmanifest", "manifest.webmanifest"],
     ["img/icon.svg", "icon.svg"],
     ["img/calli-graph-equills-pcd-25.png", "img/calli-graph-equills-pcd-25.png"],
+    ["img/calli-graph-pcd-share.png", "img/calli-graph-pcd-share.png"],
+    ["img/calli-graph-equills-pcd-25-640.png", "img/calli-graph-equills-pcd-25-640.png"],
   ];
 
   for (const directory of ["js/brushes", "js/core", "js/renderers"]) {
