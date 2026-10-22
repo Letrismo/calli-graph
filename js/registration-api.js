@@ -38,13 +38,13 @@ export class RegistrationApi {
     return { remaining: data.remaining, available: data.available && data.remaining > 0 };
   }
 
-  async register({ full_name, email }) {
+  async register({ full_name, email, turnstile_token }) {
     // A lost response may still represent a saved registration. Never retry automatically.
     const response = await this.fetcher(this.registrationUrl, {
       method: "POST",
       headers: { Accept: "application/json", "Content-Type": "application/json" },
       credentials: "omit",
-      body: JSON.stringify({ registration: { full_name, email } }),
+      body: JSON.stringify({ registration: { full_name, email }, turnstile_token }),
       signal: AbortSignal.timeout(15000),
     });
     if (response.status === 201) return;

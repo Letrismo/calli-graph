@@ -3,6 +3,7 @@ import test from "node:test";
 import { RegistrationApi, RegistrationError } from "./registration-api.js";
 
 const registration = { full_name: "María Pérez López", email: "maria@example.test" };
+const turnstile_token = "verified-test-token";
 const api = (fetcher) => new RegistrationApi({ fetcher });
 
 test("the default fetcher preserves the browser receiver for GET and POST", async (t) => {
@@ -16,7 +17,7 @@ test("the default fetcher preserves the browser receiver for GET and POST", asyn
   });
   const service = new RegistrationApi();
   await service.availability();
-  await service.register(registration);
+  await service.register({ ...registration, turnstile_token });
   assert.deepEqual(methods, ["GET", "POST"]);
 });
 
@@ -49,21 +50,21 @@ test("registration sends the nested contract and requires 201", async () => {
     assert.equal(options.method, "POST");
     assert.equal(options.credentials, "omit");
     assert.equal(options.headers["Content-Type"], "application/json");
-    assert.deepEqual(JSON.parse(options.body), { registration });
+    assert.deepEqual(JSON.parse(options.body), { registration, turnstile_token });
     return new Response(null, { status: 201 });
-  }).register({ ...registration, ignored: true });
+  }).register({ ...registration, turnstile_token, ignored: true });
   for (const status of [200, 202, 204]) {
-    await assert.rejects(api(async () => new Response(null, { status })).register(registration));
+    await assert.rejects(api(async () => new Response(null, { status })).register({ ...registration, turnstile_token }));
   }
 });
 
 test("both conflicts and field validation errors retain their meaning", async () => {
   for (const error of ["event_full", "already_registered"]) {
-    await assert.rejects(api(async () => Response.json({ error }, { status: 409 })).register(registration),
+    await assert.rejects(api(async () => Response.json({ error }, { status: 409 })).register({ ...registration, turnstile_token }),
       (result) => result instanceof RegistrationError && result.status === 409 && result.code === error);
   }
   const errors = { full_name: ["es obligatorio"], email: ["no es válido"] };
-  await assert.rejects(api(async () => Response.json({ errors }, { status: 422 })).register(registration), (result) => {
+  await assert.rejects(api(async () => Response.json({ errors }, { status: 422 })).register({ ...registration, turnstile_token }), (result) => {
     assert.equal(result.status, 422);
     assert.deepEqual(result.errors, errors);
     return true;
@@ -78,7 +79,7 @@ test("failed or uncertain submissions are never retried automatically", async ()
       if (failure === "network") throw new TypeError("Connection lost");
       return new Response("Server error", { status: failure });
     });
-    await assert.rejects(service.register(registration));
+    await assert.rejects(service.register({ ...registration, turnstile_token }));
     assert.equal(calls, 1);
   }
 });

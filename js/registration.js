@@ -1,6 +1,7 @@
 import { RegistrationApi } from "./registration-api.js";
+import { TurnstileChallenge } from "./turnstile.js";
 
-export function initializeRegistration(root, api = new RegistrationApi()) {
+export function initializeRegistration(root, api = new RegistrationApi(), challenge = new TurnstileChallenge(root)) {
   const form = root.querySelector("[data-registration-form]");
   const fields = root.querySelector("[data-registration-fields]");
   const status = root.querySelector("[data-registration-status]");
@@ -11,9 +12,16 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
   let full = false;
   let confirmed = false;
 
+  function updateSubmit() {
+    button.disabled = busy || full || confirmed || fields.disabled || !challenge.getToken();
+  }
+
+  challenge.start(updateSubmit);
+
   function showAvailability({ available }) {
     full = !available;
     fields.disabled = full || confirmed;
+    updateSubmit();
     if (confirmed) {
       status.textContent = "Tu registro fue confirmado. ¡Nos vemos en CENTRO!";
     } else {
@@ -45,6 +53,7 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
       retry.hidden = false;
     } finally {
       busy = false;
+      updateSubmit();
     }
   }
 
@@ -60,6 +69,11 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
     const valid = form.reportValidity();
     if (!valid || inputs.some((input) => !input.value)) return;
 
+    const turnstile_token = challenge.getToken();
+    if (!turnstile_token) {
+      updateSubmit();
+      return;
+    }
     const registration = Object.fromEntries(inputs.map((input) => [input.name, input.value]));
     busy = true;
     fields.disabled = true;
@@ -68,7 +82,7 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
     button.textContent = "Enviando…";
     status.textContent = "Estamos registrando tu asistencia…";
     try {
-      await api.register(registration);
+      await api.register({ ...registration, turnstile_token });
       confirmed = true;
       form.reset();
       form.hidden = true;
@@ -79,7 +93,11 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
         // Availability failure must never replace a successful registration.
       }
     } catch (error) {
-      if (error.status === 409 && error.code === "event_full") {
+      if (error.code === "invalid_turnstile_token") {
+        status.textContent = "La verificación caducó o no es válida. Verifica de nuevo y vuelve a enviar.";
+      } else if (error.code === "turnstile_unavailable") {
+        status.textContent = "La verificación no está disponible por ahora. Intenta de nuevo en unos momentos.";
+      } else if (error.status === 409 && error.code === "event_full") {
         showAvailability({ remaining: 0, available: false });
       } else if (error.status === 409 && error.code === "already_registered") {
         status.textContent = "Este correo ya está registrado.";
@@ -98,8 +116,10 @@ export function initializeRegistration(root, api = new RegistrationApi()) {
         status.textContent = "No pudimos confirmar tu registro. Puedes intentar de nuevo; si el envío anterior se guardó, te indicaremos que tu correo ya está registrado.";
       }
     } finally {
+      if (!confirmed) challenge.reset();
       busy = false;
       fields.disabled = full || confirmed;
+      updateSubmit();
       form.removeAttribute("aria-busy");
       button.textContent = "Registrarme";
       if (!fields.disabled) inputs.find((input) => input.hasAttribute("aria-invalid"))?.focus();
@@ -116,5 +136,7 @@ if (root) {
     baseUrl: import.meta.env.DEV ? "/api/events/caligraf-2026" : undefined,
     availabilityUrl: import.meta.env.VITE_REGISTRATION_AVAILABILITY_URL || undefined,
     registrationUrl: import.meta.env.VITE_REGISTRATION_URL || undefined,
+  }), new TurnstileChallenge(root, {
+    sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY || undefined,
   }));
 }

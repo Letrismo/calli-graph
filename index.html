@@ -2,6 +2,7 @@
 <html lang="es" class="group/root lg:snap-y lg:snap-mandatory scroll-smooth scroll-pt-16 bg-bg sm:scroll-pt-20 motion-reduce:scroll-auto data-loading:overflow-hidden">
   <head>
     <meta charset="utf-8" />
+    <link rel="preconnect" href="https://challenges.cloudflare.com" />
     <script>
       // Run before assets and modules; keep loopback hosts usable with local HTTP servers.
       const localHost = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname)
@@ -150,7 +151,12 @@
                     <input id="registration-email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="registration-email-error" class="block w-full border border-white/40 bg-bg px-3 py-2 text-base text-text" />
                     <p id="registration-email-error" data-registration-error="email" class="mt-1 text-sm text-red"></p>
                   </div>
-                  <button type="submit" class="mt-1 min-h-11 border border-current bg-text px-4 py-2 text-base font-semibold text-bg enabled:cursor-pointer enabled:hover:bg-bg enabled:hover:text-text disabled:cursor-wait disabled:opacity-50">Registrarme</button>
+                  <div>
+                    <div data-turnstile class="min-h-16"></div>
+                    <p data-turnstile-status class="mt-1 text-sm" role="status" aria-live="polite">Preparando verificación…</p>
+                    <button data-turnstile-retry type="button" class="mt-2 min-h-11 cursor-pointer text-sm underline underline-offset-4" hidden>Reintentar verificación</button>
+                  </div>
+                  <button type="submit" disabled class="mt-1 min-h-11 border border-current bg-text px-4 py-2 text-base font-semibold text-bg enabled:cursor-pointer enabled:hover:bg-bg enabled:hover:text-text disabled:cursor-wait disabled:opacity-50">Registrarme</button>
                 </fieldset>
               </form>
               <button data-registration-retry type="button" class="mt-3 min-h-11 cursor-pointer text-sm underline underline-offset-4" hidden>Volver a consultar disponibilidad</button>

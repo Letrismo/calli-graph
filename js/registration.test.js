@@ -1,7 +1,18 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { initializeRegistration } from "./registration.js";
+import { initializeRegistration as initializeController } from "./registration.js";
 import { RegistrationError } from "./registration-api.js";
+
+function challengeFixture(token = "verified-test-token") {
+  return {
+    token, resets: 0,
+    start(onChange) { this.onChange = onChange; onChange(); },
+    getToken() { return this.token; },
+    reset() { this.resets += 1; this.setToken(""); },
+    setToken(value) { this.token = value; this.onChange?.(); },
+  };
+}
+const initializeRegistration = (root, api, challenge = challengeFixture()) => initializeController(root, api, challenge);
 
 // Minimal DOM fixture for controller transitions; native validation is declared in HTML.
 function fixture() {
@@ -139,5 +150,57 @@ test("blank or whitespace-only fields never send a registration", async () => {
     [ui.inputs.full_name.value, ui.inputs.email.value] = values;
     await ui.form.trigger("submit");
     assert.equal(submissions, 0);
+  }
+});
+
+
+test("submission requires a current token even for a programmatic submit", async () => {
+  const ui = fixture();
+  const challenge = challengeFixture("");
+  let sent;
+  await initializeRegistration(ui.root, {
+    availability: async () => available,
+    register: async (payload) => { sent = payload; },
+  }, challenge);
+  assert.equal(ui.fields.disabled, false);
+  assert.equal(ui.button.disabled, true);
+  await ui.form.trigger("submit");
+  assert.equal(sent, undefined);
+  challenge.setToken("valid-token");
+  assert.equal(ui.button.disabled, false);
+  challenge.setToken("");
+  assert.equal(ui.button.disabled, true);
+  await ui.form.trigger("submit");
+  assert.equal(sent, undefined);
+  challenge.setToken("fresh-token");
+  await ui.form.trigger("submit");
+  assert.deepEqual(sent, { full_name: "valor", email: "maria@example.test", turnstile_token: "fresh-token" });
+  assert.equal(challenge.resets, 0);
+});
+
+test("every failed POST consumes the token and needs a fresh challenge", async () => {
+  for (const error of [
+    new RegistrationError(422, { error: "invalid_turnstile_token" }),
+    new RegistrationError(503, { error: "turnstile_unavailable" }),
+    new RegistrationError(422, { errors: { email: ["no es válido"] } }),
+    new TypeError("Network error"),
+  ]) {
+    const ui = fixture();
+    const challenge = challengeFixture();
+    let calls = 0;
+    await initializeRegistration(ui.root, {
+      availability: async () => available,
+      register: async () => { calls += 1; throw error; },
+    }, challenge);
+    await ui.form.trigger("submit");
+    assert.equal(challenge.resets, 1);
+    assert.equal(ui.button.disabled, true);
+    assert.equal(ui.inputs.email.value, "maria@example.test");
+    await ui.form.trigger("submit");
+    assert.equal(calls, 1);
+    challenge.setToken("new-token");
+    assert.equal(ui.button.disabled, false);
+    if (error.code === "invalid_turnstile_token") assert.match(ui.status.textContent, /verificación caducó/);
+    if (error.code === "turnstile_unavailable") assert.match(ui.status.textContent, /no está disponible/);
   }
 });
